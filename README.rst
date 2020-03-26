@@ -1,57 +1,22 @@
-.. You should enable this project on travis-ci.org and coveralls.io to make
-   these badges work. The necessary Travis and Coverage config files have been
-   generated for you.
-
-.. image:: https://travis-ci.org//ckanext-nomad.svg?branch=master
-    :target: https://travis-ci.org//ckanext-nomad
-
-.. image:: https://coveralls.io/repos//ckanext-nomad/badge.svg
-  :target: https://coveralls.io/r//ckanext-nomad
-
-.. image:: https://pypip.in/download/ckanext-nomad/badge.svg
-    :target: https://pypi.python.org/pypi//ckanext-nomad/
-    :alt: Downloads
-
-.. image:: https://pypip.in/version/ckanext-nomad/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-nomad/
-    :alt: Latest Version
-
-.. image:: https://pypip.in/py_versions/ckanext-nomad/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-nomad/
-    :alt: Supported Python versions
-
-.. image:: https://pypip.in/status/ckanext-nomad/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-nomad/
-    :alt: Development Status
-
-.. image:: https://pypip.in/license/ckanext-nomad/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-nomad/
-    :alt: License
-
 =============
 ckanext-nomad
 =============
 
-.. Put a description of your extension here:
-   What does it do? What features does it have?
-   Consider including some screenshots or embedding a video!
+Harvester for [NOMAD Respository API](https://repository.nomad-coe.eu/). Adds the ability to use NOMAD as harvester source type.
 
+This extension is in a very early state to survey the feasibility of the NOMAD harvesting function.
 
 ------------
 Requirements
 ------------
 
-For example, you might want to mention here which versions of CKAN this
-extension works with.
-
+Requires the [ckanext-harvester](https://github.com/ckan/ckanext-harvest) extension.
 
 ------------
 Installation
 ------------
 
-.. Add any additional install steps to the list below.
-   For example installing any non-Python dependencies or adding any required
-   config settings.
+Install ckanext-harvester first.
 
 To install ckanext-nomad:
 
@@ -61,53 +26,29 @@ To install ckanext-nomad:
 
 2. Install the ckanext-nomad Python package into your virtual environment::
 
-     pip install ckanext-nomad
+     pip install -e git+https://github.com/simeonackermann/ckanext-nomad.git#egg=ckanext-nomad
 
 3. Add ``nomad`` to the ``ckan.plugins`` setting in your CKAN
    config file (by default the config file is located at
    ``/etc/ckan/default/production.ini``).
 
-4. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu::
-
-     sudo service apache2 reload
+4. Restart CKAN
 
 
----------------
-Config Settings
----------------
+-----
+Usage
+-----
 
-Document any optional config settings here. For example::
+Run the [ckanext-harvest](https://github.com/ckan/ckanext-harvest#configuration) installation and configuration.
 
-    # The minimum number of hours to wait before re-checking a resource
-    # (optional, default: 24).
-    ckanext.nomad.some_setting = some_default_value
+Add a new NOMAD Harvester source under
 
-
-------------------------
-Development Installation
-------------------------
-
-To install ckanext-nomad for development, activate your CKAN virtualenv and
-do::
-
-    git clone https://github.com//ckanext-nomad.git
-    cd ckanext-nomad
-    python setup.py develop
-    pip install -r dev-requirements.txt
+    http://{ckan-instance-host}/harvest
 
 
------------------
-Running the Tests
------------------
+Running the harvest jobs see https://github.com/ckan/ckanext-harvest#running-the-harvest-jobs . Eg. to run tests:
 
-To run the tests, do::
-
-    nosetests --nologcapture --with-pylons=test.ini
-
-To run the tests and produce a coverage report, first make sure you have
-coverage installed in your virtualenv (``pip install coverage``) then run::
-
-    nosetests --nologcapture --with-pylons=test.ini --with-coverage --cover-package=ckanext.nomad --cover-inclusive --cover-erase --cover-tests
+    (pyenv) $ ckan-paster --plugin=ckanext-harvest harvester run_test {harvest-id} -c $CKAN_CONFIG/production.ini
 
 
 ---------------------------------
